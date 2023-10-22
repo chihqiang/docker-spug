@@ -1,0 +1,41 @@
+version: "3.3"
+services:
+  spug-mysql:
+    image: mysql:8.0
+    container_name: spug-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: "spug"
+      MYSQL_ROOT_PASSWORD: "123456"
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  spug:
+    image: zhiqiangwang/spug:3.2.7
+    container_name: spug
+    privileged: true
+    restart: always
+    volumes:
+      - ./redis:/var/lib/redis
+      - ./nginx:/var/log/nginx
+      - ./spug/logs:/data/spug/spug_api/logs
+      - ./spug/repos:/data/repos
+      
+    ports:
+      # 如果80端口被占用可替换为其他端口，例如: - "8000:80"
+      - "80:80"
+    depends_on:
+      - spug-mysql
+    environment:
+      - MYSQL_DATABASE=spug
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=123456
+      - MYSQL_HOST=spug-mysql
+      - MYSQL_PORT=3306
