@@ -1,25 +1,25 @@
 # docker-spug
 
 ~~~
-docker build --build-arg="SPUG_VERSION=3.2.7" -t zhiqiangwang/spug:3.2.7  .
+docker build --build-arg="SPUG_VERSION=3.3.0" -t zhiqiangwang/spug:3.3.0  .
 ~~~
 
-# golang Dockerfile
+# Golang Dockerfile
 ~~~
-FROM zhiqiangwang/spug:3.2.7
+FROM zhiqiangwang/spug:latest
 
 RUN apt update
 
-RUN cd /tmp && wget https://go.dev/dl/go1.18.10.linux-amd64.tar.gz -O go.tar.gz \
-    && tar -xf go.tar.gz -C /usr/local 
-
+# golang
+ARG GOLANGURL=https://go.dev/dl/go1.18.10.linux-amd64.tar.gz
+RUN cd /tmp && wget ${GOLANGURL} -O go.tar.gz && tar -xf go.tar.gz -C /usr/local 
 ENV GOROOT=/usr/local/go 
 ENV GOPATH=/root/go
 ENV GO111MODULE=auto
-ENV GOPROXY=https://goproxy.cn,direct
-ENV PATH=$PATH:$GOROOT/bin
-ENV PATH=$PATH:$GOPATH/bin
+ENV GOPROXY=https://goproxy.io,direct
+ENV PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
+# 清理缓存
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN rm -rf /tmp/*
 ~~~

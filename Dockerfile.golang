@@ -8,7 +8,7 @@ RUN cd /tmp && wget ${GOLANGURL} -O go.tar.gz && tar -xf go.tar.gz -C /usr/local
 ENV GOROOT=/usr/local/go 
 ENV GOPATH=/root/go
 ENV GO111MODULE=auto
-ENV GOPROXY=https://goproxy.cn,direct
+ENV GOPROXY=https://goproxy.io,direct
 ENV PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # 清理缓存
