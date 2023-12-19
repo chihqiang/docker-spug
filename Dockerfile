@@ -24,7 +24,7 @@ RUN pip3 install --no-cache-dir -i https://mirrors.aliyun.com/pypi/simple/ \
     openpyxl==3.0.3 \
     user_agents==2.2.0
 
-ARG SPUG_VERSION=3.3.0
+ARG SPUG_VERSION=3.3.1
 ENV MYSQL_DATABASE=spug
 ENV MYSQL_USER=spug
 ENV MYSQL_PASSWORD=spug.cc
