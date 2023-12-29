@@ -1,7 +1,7 @@
 # docker-spug
 
 ~~~
-docker build --build-arg="SPUG_VERSION=3.3.1" -t zhiqiangwang/spug:3.3.1  .
+docker build --build-arg="SPUG_VERSION=3.3.2" -t zhiqiangwang/spug:3.3.2  .
 ~~~
 
 # Golang Dockerfile
