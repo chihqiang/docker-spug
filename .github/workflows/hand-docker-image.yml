@@ -1,0 +1,24 @@
+name: hand publish Docker
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # https://github.com/zzqqw/docker-spug/settings/secrets/actions
+      DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      # https://github.com/zzqqw/docker-spug/settings/secrets/actions
+      DOCKER_PWD: ${{ secrets.DOCKER_PWD }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          #https://github.com/zzqqw/docker-spug/settings/secrets/actions
+          token: ${{ secrets.REPO_TOKEN }}
+      - name: Set executable permissions 
+        run: chmod +x ./release.sh
+      - name: Execute publishing script
+        run: ./release.sh
+        shell: bash
+
