@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 # 版本
-ARG SPUG_VERSION=3.3.2
+ARG SPUG_VERSION=
 
 # 安装依赖
 RUN apt-get update && apt install -y default-libmysqlclient-dev libldap2-dev libssl-dev gnupg2 ca-certificates lsb-release build-essential libsasl2-dev pkg-config locales \
