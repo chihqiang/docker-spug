@@ -81,13 +81,20 @@ FROM zhiqiangwang/spug:latest
 RUN apt update
 
 # golang
-ARG GOLANGURL=https://go.dev/dl/go1.18.10.linux-amd64.tar.gz
+ARG GOLANGURL=https://go.dev/dl/go1.21.13.linux-amd64.tar.gz
 RUN cd /tmp && wget ${GOLANGURL} -O go.tar.gz && tar -xf go.tar.gz -C /usr/local 
 ENV GOROOT=/usr/local/go 
 ENV GOPATH=/root/go
 ENV GO111MODULE=auto
 ENV GOPROXY=https://goproxy.io,direct
 ENV PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+
+ARG NODEJS_URL=https://nodejs.org/dist/v20.15.1/node-v20.15.1-linux-x64.tar.gz
+RUN mkdir -p /usr/local/nodejs
+RUN cd /tmp && wget ${NODEJS_URL} -O nodejs.tar.gz && tar --strip-components 1 -xf nodejs.tar.gz -C /usr/local/nodejs
+ENV PATH=$PATH:/usr/local/nodejs/bin
+RUN npm config set registry https://registry.npmmirror.com
 
 # 清理缓存
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
