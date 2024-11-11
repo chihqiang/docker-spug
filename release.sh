@@ -3,30 +3,6 @@
 set -e
 set -u
 
-# jobs:
-#   build:
-#     # 使用操作系统
-#     runs-on: ubuntu-latest
-#     # 环境变量
-#     env:
-#       # https://github.com/zzqqw/docker-spug/settings/secrets/actions
-#       DOCKER_USER: ${{ secrets.DOCKER_USER }}
-#       # https://github.com/zzqqw/docker-spug/settings/secrets/actions
-#       DOCKER_PWD: ${{ secrets.DOCKER_PWD }}
-#     # 发布流
-#     steps:
-#       - uses: actions/checkout@v4
-#         with:
-#           #https://github.com/zzqqw/docker-spug/settings/secrets/actions
-#           token: ${{ secrets.REPO_TOKEN }}
-#       - name: Set executable permissions 
-#         run: chmod +x ./release.sh
-#       # 发布shell
-#       - name: Execute publishing script
-#         run: ./release.sh
-#         shell: bash
-
-
 # ubuntu: apt install -y jq
 # mac:  brew install jq
 
@@ -56,9 +32,10 @@ docker build --build-arg="SPUG_VERSION=$version" -t zhiqiangwang/spug:$version  
 echo "Release Docker Version: " $version
 docker push zhiqiangwang/spug:$version
 
+
 echo "Release Docker Version latest"
 # docker pull 
-docker tag zhiqiangwang/spug:$version zhiqiangwang/spug:latest
+docker build  --build-arg="IMAGE_TAG=$version" -f Dockerfile.latest   -t zhiqiangwang/spug:latest  .
 docker push zhiqiangwang/spug:latest
 
 echo "Submit the latest code"
