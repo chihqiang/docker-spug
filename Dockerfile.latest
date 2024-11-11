@@ -1,0 +1,9 @@
+ARG IMAGE_TAG="latest"
+
+FROM zhiqiangwang/spug:${IMAGE_TAG}
+
+RUN apt update
+
+RUN apt install -y software-properties-common && add-apt-repository -y ppa:ondrej/php
+
+RUN apt update
