@@ -11,6 +11,8 @@ jobs:
       DOCKER_USER: ${{ secrets.DOCKER_USER }}
       # https://github.com/zzqqw/docker-spug/settings/secrets/actions
       DOCKER_PWD: ${{ secrets.DOCKER_PWD }}
+      TENCENT_USER: ${{ secrets.TENCENT_USER }}
+      TENCENT_PWD: ${{ secrets.TENCENT_PWD }}
     steps:
       - uses: actions/checkout@v4
         with:
