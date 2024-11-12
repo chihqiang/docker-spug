@@ -38,6 +38,13 @@ echo "Release Docker Version latest"
 docker build  --build-arg="IMAGE_TAG=$version" -f Dockerfile.latest   -t zhiqiangwang/spug:latest  .
 docker push zhiqiangwang/spug:latest
 
+# 将latest推送到国内
+echo "Submit Tencentyun Docker Image"
+# 登录仓库
+docker login hkccr.ccs.tencentyun.com --username=$TENCENT_USER -p $TENCENT_PWD
+docker tag zhiqiangwang/spug:latest hkccr.ccs.tencentyun.com/buildx/soft:spug
+docker push hkccr.ccs.tencentyun.com/buildx/soft:spug
+
 echo "Submit the latest code"
 # 更新代码
 echo "$version" >currentversion
