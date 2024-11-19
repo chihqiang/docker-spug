@@ -1,4 +1,4 @@
-# Install Docker
+# 安装docker
 
 ~~~
 curl -fsSL https://get.docker.com | bash -s docker
@@ -58,7 +58,7 @@ services:
 docker compose up -d
 ~~~
 
-# Common commands
+# 常见命令
 
 ~~~
 //初始化。
@@ -71,6 +71,18 @@ docker exec spug python3 /data/spug/spug_api/manage.py user reset -u admin -p 12
 docker exec spug python3 /data/spug/spug_api/manage.py user enable -u admin
 //禁用登录MFA
 docker exec spug python3 /data/spug/spug_api/manage.py set mfa disable
+~~~
+
+# 安装语言
+
+~~~
+curl -sSL https://raw.githubusercontent.com/izhiqiang/sh/main/lang/binary-install.sh | bash -s go 1.18
+//发布配置"代码检出后执行"开始执行
+export PATH=$PATH:/usr/local/lang/golang/1.18/bin
+
+curl -sSL https://raw.githubusercontent.com/izhiqiang/sh/main/lang/binary-install.sh | bash -s node 20.18.0
+//发布配置"代码检出后执行"开始执行
+export PATH=$PATH:/usr/local/lang/nodejs/20.18.0/bin
 ~~~
 
 # Golang Dockerfile

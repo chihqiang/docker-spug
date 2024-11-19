@@ -27,6 +27,7 @@ services:
       - ./nginx:/var/log/nginx
       - ./spug/logs:/data/spug/spug_api/logs
       - ./spug/repos:/data/repos
+      - ./lang:/usr/local/lang
       
     ports:
       # 如果80端口被占用可替换为其他端口，例如: - "8000:80"
