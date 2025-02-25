@@ -241,7 +241,7 @@ def _deploy_ext1_host(req, helper, h_id, env):
             helper.send_step(h_id, 1, '\033[33m跳过√\033[0m\r\n')
         else:
             # clean
-            clean_command = f'ls -d {extend.deploy_id}_* 2> /dev/null | sort -t _ -rnk2 | tail -n +{extend.versions + 1} | xargs rm -rf'
+            clean_command = f'ls -d {extend.deploy_id}_* 2> /dev/null | sort -t _ -rnk2 | tail -n +{extend.versions + 1} | xargs sudo rm -rf'
             helper.remote_raw(host.id, ssh, f'cd {extend.dst_repo} && {clean_command}')
             # transfer files
             tar_gz_file = f'{req.spug_version}.tar.gz'
