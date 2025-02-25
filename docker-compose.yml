@@ -26,6 +26,7 @@ services:
       - ./redis:/var/lib/redis
       - ./nginx:/var/log/nginx
       - ./spug/logs:/data/spug/spug_api/logs
+#      - ./spug_api/apps/deploy/utils.py:/data/spug/spug_api/apps/deploy/utils.py
       - ./spug/repos:/data/repos
       - ./lang:/usr/local/lang
       
