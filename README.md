@@ -131,6 +131,18 @@ docker exec spug python3 /data/spug/spug_api/manage.py user enable -u admin
 docker exec spug python3 /data/spug/spug_api/manage.py set mfa disable
 ~~~
 
+# 宿主常见命令
+
+## 创建一个非root的账号进行发布
+
+1. 定义一个`部署路径`和`存储路径`的根目录 `/data/wwwdata/`
+2. 创建账号并输入密码 `sudo adduser spug`
+3. 将新用户加入 `sudo` 组 `sudo usermod -aG sudo spug`
+4. sudo 免密 `echo "spug ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/spug`
+5. 设置目录整体权限 `sudo chown -R spug:spug /data/wwwdata`
+
+
+
 # 安装语言
 
 ~~~
