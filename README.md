@@ -146,11 +146,11 @@ docker exec spug python3 /data/spug/spug_api/manage.py set mfa disable
 # 安装语言
 
 ~~~
-curl -sSL https://raw.githubusercontent.com/izhiqiang/sh/main/lang/binary-install.sh | bash -s go 1.18
+curl -sSL https://raw.githubusercontent.com/chihqiang/sh/main/lang/binary-install.sh | bash -s go 1.18
 //发布配置"代码检出后执行"开始执行
 export PATH=$PATH:/usr/local/lang/golang/1.18/bin
 
-curl -sSL https://raw.githubusercontent.com/izhiqiang/sh/main/lang/binary-install.sh | bash -s node 20.18.0
+curl -sSL https://raw.githubusercontent.com/chihqiang/sh/main/lang/binary-install.sh | bash -s node 20.18.0
 //发布配置"代码检出后执行"开始执行
 export PATH=$PATH:/usr/local/lang/nodejs/20.18.0/bin
 ~~~
