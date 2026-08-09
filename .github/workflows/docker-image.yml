@@ -1,0 +1,45 @@
+name: docker-image
+
+on:
+  workflow_dispatch:
+    inputs:
+      spug_version:
+        description: 'spug version to build'
+        required: true
+    
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set version from input
+        run: |
+          echo "VERSION=${{ github.event.inputs.spug_version }}" >> $GITHUB_ENV
+          echo "Building spug version: $VERSION"
+          
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push multi-platform image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            zhiqiangwang/spug:${{ env.VERSION }}
+            zhiqiangwang/spug:latest
+          build-args: |
+            SPUG_VERSION=${{ env.VERSION }}
