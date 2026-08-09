@@ -23,7 +23,7 @@ RUN pip3 install --no-cache-dir \
     user_agents==2.2.0
 
 # 安装编译好的web页面
-RUN cd /tmp && curl -o web.tar.gz https://github.com/openspug/spug/releases/download/v${SPUG_VERSION}/web_v${SPUG_VERSION}.tar.gz \
+RUN cd /tmp && curl -fL -o web.tar.gz https://github.com/openspug/spug/releases/download/v${SPUG_VERSION}/web_v${SPUG_VERSION}.tar.gz \
     && tar -xzvf web.tar.gz -C /data/spug/spug_web/
 
 # mysql数据库相关配置
